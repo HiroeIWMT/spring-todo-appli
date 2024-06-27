@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thmeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tasks list</title>
+</head>
+<body>
+<h1>My Tasks list</h1>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description概要</th>
+            <th>statusステータス</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="task : ${taskList}" th:object="${task}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{summary}"></td>
+            <td th:text="*{status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
