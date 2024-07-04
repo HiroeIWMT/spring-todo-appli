@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TaskService {
+
 private final TaskRepository taskRepository;
 
     public List<TaskEntity> find(){

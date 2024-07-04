@@ -12,7 +12,7 @@ import java.util.Optional;
 @Mapper
 public interface TaskRepository {
 
-    @Select("SELECT id, summary, description, status FROM tasks;")
+    @Select("SELECT id, summary, description, status FROM tasks")
     List<TaskEntity> select();
 
     @Select("SELECT id, summary, description, status FROM tasks WHERE id= #{taskId}")
