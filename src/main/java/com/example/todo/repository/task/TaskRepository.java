@@ -15,7 +15,7 @@ public interface TaskRepository {
     @Select("SELECT id, summary, description, status FROM tasks")
     List<TaskEntity> select();
 
-    @Select("SELECT id, summary, description, status FROM tasks WHERE id= #{taskId}")
+    @Select("SELECT id, summary, description, status FROM tasks WHERE id = #{taskId}")
     Optional<TaskEntity> selectById(@Param("taskId") long taskId);
 
     @Insert("""
