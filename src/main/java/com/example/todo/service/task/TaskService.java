@@ -22,6 +22,7 @@ private final TaskRepository taskRepository;
         return taskRepository.selectById(taskId);
     }
 
+    ///create update系はtransactionが一般的につけられる
     @Transactional
     public void create(TaskEntity newEntity) {
         taskRepository.insert(newEntity);

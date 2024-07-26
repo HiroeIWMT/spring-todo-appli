@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,18 +35,24 @@ public class TaskController {
 
     //GET /tasks/creationForm
     @GetMapping("/creationForm")
-    public String showCreationForm(TaskForm form, Model model){
-        if (form == null){
-            form = new TaskForm(null,null,null);
-;        }
-        model.addAttribute("taskForm", form);
+    public String showCreationForm(@ModelAttribute TaskForm form){
         return "tasks/form";
     }
 
+    //ModelAttributeアノをつけると、modelの役目もifも担ってくれる下記は、リファクト前
+    //public String showCreationForm(TaskForm form, Model model){
+    //        if (form == null){
+    //            form = new TaskForm(null,null,null);
+    //        }
+    //        model.addAttribute("taskForm", form);
+    //        return "tasks/form";
+
+
+    //POSTリクエストは二重登録を防ぐためのPRGパターンを忘れずに。redirect
     @PostMapping
-    public String create(@Validated TaskForm form, BindingResult bindingResult, Model model) {
+    public String create(@Validated TaskForm form, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            return showCreationForm(form, model);
+            return showCreationForm(form);
         }
         taskService.create(form.toEntity());
         return "redirect:/tasks";
